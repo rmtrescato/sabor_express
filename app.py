@@ -1,6 +1,8 @@
 import os
 
-restaurantes = ['Pizza', 'Sushi']
+restaurantes = [{'nome':'Sapore', 'categoria':'Japonesa', 'ativo':False},
+                {'nome':'Pizza Mania', 'categoria':'Italiana', 'ativo':True},
+                {'nome':'Vivenda do Camarão', 'categoria':'Nordestina', 'ativo':False}]
 
 def exibir_nome_do_programa():
     print("""
@@ -19,33 +21,47 @@ def exibir_opcoes():
     print('4. Sair\n')
 
 def finalizar_app():
-    os.system('clear') #funcao do MAC, se for Windows "cls"
-    print('Obrigado por utilizar nossos serviços\n')
+    exibir_subtitulo('Obrigado por utilizar nossos serviços\n')
 
+def voltar_ao_menu_principal():
+    input('\nPressione uma tecla para retornar ao menu ')
+    main()
+    
 def opcao_invalida():
     print('Opção invalida!\n')
-    input('Pressione uma tecla para retornar ao menu principal')
-    main()
-    
-def cadastrar_novo_restaurante():
+    voltar_ao_menu_principal()
+
+def exibir_subtitulo(texto):
     os.system('clear')
-    print('Bem-vindo(a) ao cadastro de novos Restaurantes\n')
+    print(texto)
+    print()
+
+def cadastrar_novo_restaurante():
+    exibir_subtitulo('Bem-vindo(a) ao cadastro de novos Restaurantes')
     nome_do_restaurante = input('Digite o nome do restaurante que deseja cadastrar: ')
-    restaurantes.append(nome_do_restaurante)
-    print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!\n')
-    input('Digite uma tecla para retornar ao menu principal ')
-    main()
+    categoria = input(f'Digite o nome da categoria do restaurante {nome_do_restaurante}: ')
+    dados_do_restaurante = {'nome':nome_do_restaurante, 'categoria':categoria, 'ativo':False}
+    restaurantes.append(dados_do_restaurante)
+    print(f'O restaurante {nome_do_restaurante} foi cadastrado com sucesso!')
+    
+    voltar_ao_menu_principal()
     
 def listar_restaurantes():
-    os.system('clear')
-    print('Lista dos restaurantes cadastrados\n')
-    
+    exibir_subtitulo('Lista dos restaurantes cadastrados')
     for restaurante in restaurantes:
-        print(f'.{restaurante}')
+        nome_restaurante = restaurante['nome']
+        categoria = restaurante['categoria']
+        ativo = restaurante['ativo']
+        print(f' - {nome_restaurante} | {categoria} | {ativo}')
     
-    input('\nDigite uma tecla para retornar ao menu principal ')
-    main()
-    
+    voltar_ao_menu_principal()
+
+def alternar_estado_restaurante():
+    exibir_subtitulo('Alterando o status do Restaurante')
+    nome_restaurante = input('Digite o nome do restaurante que deseja alterar o status: ')
+
+    voltar_ao_menu_principal()
+            
 def escolher_opcoes():
     try:
         opcao_escolhida = int(input('Escolha uma opção: '))
@@ -56,7 +72,7 @@ def escolher_opcoes():
         elif opcao_escolhida == 2:
             listar_restaurantes()
         elif opcao_escolhida == 3:
-            print('Ativar Restaurante')
+            alternar_estado_restaurante()
         elif opcao_escolhida == 4:
             finalizar_app()
         else:
