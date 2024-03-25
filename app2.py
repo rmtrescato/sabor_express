@@ -1,7 +1,7 @@
 from modelos.restaurantes import Restaurante
 
 restaurante_sapore = Restaurante('sapore', 'Gourmet')
-restaurante_sapore.receber_avaliacao('Gui', 10)
+restaurante_sapore.receber_avaliacao('Gui', 2)
 restaurante_sapore.receber_avaliacao('Lari', 8)
 restaurante_sapore.receber_avaliacao('Maria', 7.7)
 
