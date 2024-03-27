@@ -16,8 +16,7 @@ restaurante_sapore.adicionar_no_cardapio(prato_paozinho)
 restaurante_sapore.alternar_estado()
 
 def main():
-    print(bebida_suco)
-    print(prato_paozinho)
+    restaurante_sapore.exibir_cardapio
     
 if __name__ == '__main__':
     main()
